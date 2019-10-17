@@ -4,7 +4,7 @@ output:
   html_document:
     toc: true
     toc_float: true
-    theme: cerulean
+
 ---
 
 # This is my awesome website
@@ -19,6 +19,8 @@ You can also put image into the project file (download, put in project, load it 
 
 ![](./image/nyc.jpeg)
 
-# Let's add another page --> About me!
+# Let's add another page: About me!
 
-You cna see [here](about_me.html)
+You can check out [here](about_me.html)
+
+#
