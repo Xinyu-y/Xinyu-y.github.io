@@ -1,5 +1,5 @@
 ---
-title: "My awesome website"
+title: "Someone's Website"
 output: 
   html_document:
     toc: true
@@ -7,6 +7,18 @@ output:
     theme: cerulean
 ---
 
-# This is Jeff's awesome website
+# This is my awesome website
 
 ![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+
+# Let's add some links..
+
+We often use [Google](https://www.google.com) for propjects (?)
+
+You can also put image into the project file (download, put in project, load it as local)
+
+![](./image/nyc.jpeg)
+
+# Let's add another page --> About me!
+
+You cna see [here](about_me.html)
