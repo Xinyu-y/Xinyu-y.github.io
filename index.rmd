@@ -1,26 +1,20 @@
 ---
-title: "Someone's Website"
+title: "Homepage"
 output: 
   html_document:
     toc: true
-    toc_float: true
-
 ---
 
-# This is my awesome website
+<br>
+<link rel="stylesheet" href="styles.css" type="text/css">
 
-![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+<img src="image/xinyu_profile.jpg" style="width:25%; border:2px solid; margin-right: 20px" align="left">
 
-# Let's add some links..
+Hi! Welcome to my personal website.
 
-We often use [Google](https://www.google.com) for propjects (?)
+My name is Xinyu Yang, an epidemilogy student working towards an MPH degree at [Mailman School of Public Health](https://www.mailman.columbia.edu/). My research interests mainly focus on epidemiology research methods, psychiatric epidemiology, and global mental health.
 
-You can also put image into the project file (download, put in project, load it as local)
+You can also check out [here](about_me.html) to know more about my academic and professional background.
 
-![](./image/nyc.jpeg)
+<br>
 
-# Let's add another page: About me!
-
-You can check out [here](about_me.html)
-
-#

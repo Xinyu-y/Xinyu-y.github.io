@@ -1,16 +1,22 @@
-name: "Yay internet!"
+name: "Xinyu Yang"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Xinyu Yang"
   right:
     - text: "About"
       href: about_me.html
-    - text: "Plotly"
-      href: plotly.html
+    - text: Examples
+      menu:
+       - text: "Plotly"
+         href: plotly.html
+       - text: "Dashboard"
+         href: dashboard.html
     - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
+      href: mailto:<xy2396@columbia.edu>
     - icon: fa-github fa-lg
       href: http://github.com/Xinyu-y/
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/yang-xinyu/
 output:
   html_document:
     theme: simplex

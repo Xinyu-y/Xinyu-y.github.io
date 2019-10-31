@@ -4,7 +4,83 @@ output:
   html_document:
     toc: true
     toc_float: true
-    theme: flatly
 ---
+<br>
+   
+## Education
 
+**Columbia University Mailman School of Public Health**     New York, NY
 
+  _Expected May 2020_
+
+  Master of Public Health (MPH) in Epidemiology; Certificate in Advanced Epidemiology  
+    
+  Relevant coursework: Analysis of Categorical Data; Observational Study; Applied Regression; Data Science I;   
+<br>
+
+**University of Macau** Macau SAR, China
+
+  _June 2018_
+
+  Bachelor of Social Science in Psychology  
+    
+  Dean’s List and Honours College   
+  Thesis: HIV/syphilis Rapid Testing Uptake Correlates Among Southeast Asian Migrant Workers.   
+<br>    
+
+**University of Rochester** Rochester, NY
+
+  _Spring, 2017_
+
+   One semester visiting student   
+    
+   Courseworks: Auditory Perception; Behavioral Medicine; I/O Psychology
+   
+<br>    
+   
+## Professional Experience
+**Global Psychiatric Epidemiology Group, New York State Psychiatric Institute** New York, NY
+
+_Research Intern	(Jun 2019 – present)_
+
+Performed data cleaning, conducted data analysis (e.g. propensity score analysis using SAS);   
+Prepared manuscript for the descriptive paper of Stress & Justice (S&J) study, which investigated the effect of parental criminal justice system involvement on child mental health   
+<br>   
+
+**Office of Educational Programs, Columbia University Mailman School of Public Health** New York, NY
+
+_Teaching Assistant	(Sep 2019 – present)_
+
+Supported educational goals of the Quantitative Research Method & Application class by fulfilling a wide range of logistical responsibilities (e.g. facilitating lab sessions, holding office hours, grading learning assessments)   
+<br>   
+
+**Culture, Stigma, and Psychosis Lab, Columbia University Teachers College** New York, NY
+
+_Part-time Research Assistant	(Jul 2019 – present)_
+
+Conducted data analysis (e.g. factor analysis in SPSS) and supported systematic reviews on mental health interventions;    
+Assisted with NIMH grant development;   
+<br>
+
+**Global and Community Mental Health Research Group** Macau SAR, China
+
+_Undergraduate Research Assistant	(Mar 2016 – Aug 2018)_
+
+Supported implementation of two longitudinal studies on migrant health;   
+Conducted literature reviews as part of protocol development and programmed survey using Qualtrics;   
+Quantitative data collection and management on field study site;    
+served as note-taker in 23 qualitative interviews;   
+Quantitative data analysis and manuscript preparation;   
+<br>
+
+**Association of Rehabilitation of Drug Abusers**	Macau SAR, China
+
+_Field Placement Intern	(Jan 2018 – Apr 2018)_
+
+Supported implementation of programs and community activities on drug and alcohol prevention among foreign adolescents through tackling root causes such as peer pressure, poverty and discrimination   
+
+   
+<br>    
+   
+## Publications
+Hall, B. J., **Yang, X.**, Huang, L., Chan, E. W. W., Yi, Grace, Tucker, J. D., & Latkin, C. (2019). Barriers and facilitators of rapid HIV and syphilis testing uptake among Filipino transnational migrants in China. AIDS and Behavior.
