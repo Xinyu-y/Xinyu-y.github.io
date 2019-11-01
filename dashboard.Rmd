@@ -1,26 +1,18 @@
 ---
-title: "Plotly Examples"
+title: "Dashboard"
 output: 
-  html_document:
-    code_folding: hide
+  flexdashboard::flex_dashboard:
+    storyboard: true
 ---
 
-
-Websites _with interactive graphics_
-
-
-```{r setup, include=FALSE}
+```{r, include=FALSE}
+library(flexdashboard)
 library(tidyverse)
-library(viridis)
 library(p8105.datasets)
 library(plotly)
-```
 
-
-```{r} 
-#clean the data set a bit
+#read in and clean the data set a bit
 set.seed(1)
-
 data(rest_inspec)
 
 inspec = 
@@ -41,29 +33,22 @@ inspec =
                           "Juice, Smoothies, Fruit Salads" = "Juice/Salads",
                           "Vietnamese/Cambodian/Malaysia" = "Other East Asian",
                           "Sandwiches/Salads/Mixed Buffet" = "Sandwiches/Salads"))
-
 ```
+
+
+
+### Frame 1
 
 ```{r}
 inspec %>% 
   mutate(boro = fct_reorder(boro, score)) %>% 
   plot_ly(y = ~score, color = ~boro, type = "box",
           colors = "Set3")
-```
-
+```   
+    
+### Frame 2
 
 ```{r}
-inspec %>%
-  group_by(boro, grade) %>% 
-  count() %>% 
-  group_by(boro) %>% 
-  mutate(
-    total = sum(n),
-    percent = round((n/total),2)) %>% 
-  plot_ly(x = ~boro, y = ~percent, color = ~grade)
-
-
-
 ax_1 <- list(
   title = "",
   tickangle = 40,
@@ -72,36 +57,6 @@ ax_1 <- list(
 ax_2 <- list(
   title = "",
   showticklabels = TRUE)
-
-  inspec %>%
-  select(boro, cuisine, score) %>% 
-  group_by(boro, cuisine) %>% 
-  summarise(median_score = round(median(score, na.rm = TRUE),1)) %>% 
-  arrange(desc(cuisine)) %>% 
-  plot_ly(
-    x = ~cuisine, y = ~boro,
-    height = 400, width = 1800) %>%
-  add_heatmap(
-    z = ~median_score,
-    text = ~paste(
-      "Boro: ", boro, "<br>Cuisine: ", cuisine,
-      "<br>Median Score: ", median_score),
-    hoverinfo = "text", showscale = TRUE,
-    opacity = 0.80) %>%
-    layout(xaxis = ax_1, yaxis = ax_2)
-
-
-ax <- list(
-  title = "",
-  type = "category",
-  categoryorder = "category ascending",
-  showgrid = TRUE,
-  showline = TRUE,
-  autorange = TRUE,
-  showticklabels = TRUE,
-  ticks = "outside",
-  tickangle = 35
-)
 
 inspec %>% 
   select(grade, score, grade_date) %>% 
@@ -115,7 +70,7 @@ inspec %>%
   unite("time", "year_1":"month_1", sep = "-", remove = TRUE, na.rm = FALSE) %>% 
   ungroup() %>% 
   arrange(year, month) %>% 
-  mutate(time = factor(time, levels = unique(time)) )%>% 
+  mutate(time = factor(time, levels = unique(time))) %>% 
   arrange(time) %>% 
   plot_ly(x = ~time, y = ~med_score, group = ~grade,
           type = "scatter", 
@@ -127,6 +82,27 @@ inspec %>%
     hoverinfo = "text") %>%
     layout(xaxis = ax_1, yaxis = ax_2)
   
+```
 
+   
+### Frame 3
+
+```{r}
+  inspec %>%
+  select(boro, cuisine, score) %>% 
+  group_by(boro, cuisine) %>% 
+  summarise(median_score = round(median(score, na.rm = TRUE),1)) %>% 
+  arrange(desc(cuisine)) %>% 
+  plot_ly(
+    x = ~cuisine, y = ~boro,
+    height = 400, width = 1400) %>%
+  add_heatmap(
+    z = ~median_score,
+    text = ~paste(
+      "Boro: ", boro, "<br>Cuisine: ", cuisine,
+      "<br>Median Score: ", median_score),
+    hoverinfo = "text", showscale = TRUE,
+    opacity = 0.90) %>%
+    layout(xaxis = ax_1, yaxis = ax_2)
 ```
 
