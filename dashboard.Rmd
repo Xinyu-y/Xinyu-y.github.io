@@ -37,7 +37,7 @@ inspec =
 
 
 
-### Frame 1
+### Score distribution by boros in NYC (lower scores indicate better inspection grading)
 
 ```{r}
 inspec %>% 
@@ -46,7 +46,7 @@ inspec %>%
           colors = "Set3")
 ```   
     
-### Frame 2
+### How the relationship between score and grading change over time
 
 ```{r}
 ax_1 <- list(
@@ -85,7 +85,7 @@ inspec %>%
 ```
 
    
-### Frame 3
+### Median score by boros and cuisines (lower scores indicate better inspection grading)
 
 ```{r}
   inspec %>%
