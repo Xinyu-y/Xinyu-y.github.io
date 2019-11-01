@@ -1,12 +1,12 @@
 ---
-title: "Plotly Code"
+title: "Plotly Fun"
 output: 
   html_document:
     code_folding: hide
 ---
 
 
-_interactive graphics_
+_interactive graphics using NYC restaurant inpection open data_
 
 ```{r, include=FALSE}
 library(flexdashboard)
@@ -107,5 +107,34 @@ inspec %>%
     hoverinfo = "text", showscale = TRUE,
     opacity = 0.90) %>%
     layout(xaxis = ax_1, yaxis = ax_2)
+```
+
+### Graph 4
+
+```{r, warning = FALSE}
+ax_3 <- list(
+  title = "Percent of  restaurant (%)",
+  tickangle = 0,
+  showticklabels = TRUE)
+
+inspec %>%
+  group_by(boro, grade, critical_flag) %>% 
+  count() %>% 
+  group_by(boro, grade) %>% 
+  mutate(
+    total = sum(n)
+    ) %>% 
+    filter(critical_flag == "Critical") %>% 
+   mutate(percent = round((n/total)*100,1)) %>% 
+  plot_ly(x = ~grade, y = ~percent, 
+          color = ~boro, 
+          colors = "Set3",
+          text = ~paste(
+            "Boro: ", boro, 
+            "<br>Grade: ", grade,
+            "<br>% with critical violation: ", percent),
+          hoverinfo = "text", showscale = TRUE,
+          opacity = 0.90) %>%
+  layout(yaxis = ax_3)
 ```
 

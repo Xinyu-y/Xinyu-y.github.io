@@ -11,7 +11,7 @@ output:
 
 Hi! Welcome to my personal website.
 
-My name is Xinyu Yang, an epidemilogy student working towards an MPH degree at [Mailman School of Public Health](https://www.mailman.columbia.edu/). My research interests mainly focus on epidemiology research methods, psychiatric epidemiology, and global mental health.
+I'm Xinyu Yang, an epidemilogy student working towards an MPH degree at [Mailman School of Public Health](https://www.mailman.columbia.edu/). My research interests mainly focus on epidemiology research methods, psychiatric epidemiology, and global mental health.
 
 You can also check out [here](about_me.html) to know more about my academic and professional background.
 

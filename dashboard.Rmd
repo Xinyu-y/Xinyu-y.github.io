@@ -11,7 +11,7 @@ library(tidyverse)
 library(p8105.datasets)
 library(plotly)
 
-#read in and clean the data set a bit
+#read in and clean the dataset
 set.seed(1)
 data(rest_inspec)
 
@@ -35,29 +35,76 @@ inspec =
                           "Sandwiches/Salads/Mixed Buffet" = "Sandwiches/Salads"))
 ```
 
-
-
-### Score distribution by boros in NYC (lower scores indicate better inspection grading)
-
-```{r}
-inspec %>% 
-  mutate(boro = fct_reorder(boro, score)) %>% 
-  plot_ly(y = ~score, color = ~boro, type = "box",
-          colors = "Set3")
-```   
-    
-### How the relationship between score and grading change over time
+   
+### Heatmap of median score by boros and cuisines (lower scores indicate better inspection grading)
 
 ```{r}
 ax_1 <- list(
   title = "",
-  tickangle = 40,
+  tickangle = 50,
   showticklabels = TRUE)
 
 ax_2 <- list(
   title = "",
+  tickangle = 0,
   showticklabels = TRUE)
 
+  inspec %>%
+  select(boro, cuisine, score) %>% 
+  group_by(boro, cuisine) %>% 
+  summarise(median_score = round(median(score, na.rm = TRUE),1)) %>% 
+  arrange(desc(cuisine)) %>% 
+  plot_ly(
+    x = ~cuisine, y = ~boro,
+    height = 400, width = 1200) %>%
+  add_heatmap(
+    z = ~median_score,
+    text = ~paste(
+      "Boro: ", boro, "<br>Cuisine: ", cuisine,
+      "<br>Median Score: ", median_score),
+    hoverinfo = "text", showscale = TRUE,
+    opacity = 0.90) %>%
+    layout(xaxis = ax_1, yaxis = ax_2)
+```
+
+***
+Grids with darker color are those did better in an inspection, and lighter color are those did worse, in general. However, the median inpection score only provides an overall picture, and there are always particular restaurants outperform or underperform.
+   
+### Percentage of restaurant with critical violations (i.e.those most likely to contribute to foodborne illness) wihin each grade across boros in NYC
+
+```{r}
+ax_3 <- list(
+  title = "Percent of restaurant (%)",
+  tickangle = 0,
+  showticklabels = TRUE)
+
+inspec %>%
+  group_by(boro, grade, critical_flag) %>% 
+  count() %>% 
+  group_by(boro, grade) %>% 
+  mutate(
+    total = sum(n)
+    ) %>% 
+    filter(critical_flag == "Critical") %>% 
+   mutate(percent = round((n/total)*100,1)) %>% 
+  plot_ly(x = ~grade, y = ~percent, 
+          color = ~boro, 
+          colors = "Set3",
+          text = ~paste(
+            "Boro: ", boro, 
+            "<br>Grade: ", grade,
+            "<br>% with critical violations: ", percent),
+          hoverinfo = "text", showscale = TRUE,
+          opacity = 0.90) %>%
+  layout(yaxis = ax_3)
+```
+
+***
+Overall, critical violations (e.g. serving raw food such as a salad without properly washing it first) are more frequent in restaurants with lower grade. Percentages are pretty even among A-grade restaurants; but for B- or C-grade restaurants, some boros seem to have higher percentage than others.
+   
+### How the relationship between inspection score and grading change over time
+
+```{r}
 inspec %>% 
   select(grade, score, grade_date) %>% 
   separate(grade_date, into = c("year", "month"), convert = TRUE) %>%
@@ -77,32 +124,38 @@ inspec %>%
           color = ~grade, 
           mode = "lines+markers",
           text = ~ paste(
-      "Time: ", year, month,
-      "<br>Median Score: ", med_score),
-    hoverinfo = "text") %>%
-    layout(xaxis = ax_1, yaxis = ax_2)
+            "Time: ", year, month,
+            "<br>Median Score: ", med_score),
+          hoverinfo = "text") %>%
+  add_segments(
+    y = 13, yend = 13, x = ~time[1], xend = ~time[144],
+    line = list(width = 1, color = "yellow"),
+    name = "cutoff", hoverinfo = "text",
+    text = paste("cutoff of A-B"),
+    showlegend = FALSE) %>% 
+  add_segments(
+    y = 27, yend = 27, x = ~time[1], xend = ~time[144],
+    line = list(width = 1, color = "yellow"),
+    name = "cutoff", hoverinfo = "text",
+    text = paste("cutoff of B-C"),
+    showlegend = FALSE) %>% 
+  layout(xaxis = ax_1, yaxis = ax_2)
+  
   
 ```
 
+***
+According to NYC.gov, restaurants with a score between 0 and 13 points earn an A, those with 14 to 27 points receive a B and those with 28 or more a C. From the plot we can see median scores for A- or B-grade fell reasonably within the range while the scores for C-grade flutuated a lot and some were far lower than the cut-off of C grade, which might be miscoded value, or the scores were not corresponding with that particular grading time.
    
-### Median score by boros and cuisines (lower scores indicate better inspection grading)
+### Inspection score distribution by boros in NYC (lower scores indicate better inspection grading)
 
 ```{r}
-  inspec %>%
-  select(boro, cuisine, score) %>% 
-  group_by(boro, cuisine) %>% 
-  summarise(median_score = round(median(score, na.rm = TRUE),1)) %>% 
-  arrange(desc(cuisine)) %>% 
-  plot_ly(
-    x = ~cuisine, y = ~boro,
-    height = 400, width = 1400) %>%
-  add_heatmap(
-    z = ~median_score,
-    text = ~paste(
-      "Boro: ", boro, "<br>Cuisine: ", cuisine,
-      "<br>Median Score: ", median_score),
-    hoverinfo = "text", showscale = TRUE,
-    opacity = 0.90) %>%
-    layout(xaxis = ax_1, yaxis = ax_2)
-```
+inspec %>% 
+  mutate(boro = fct_reorder(boro, score)) %>% 
+  plot_ly(y = ~score, color = ~boro, type = "box",
+          colors = "Set3")
+```   
 
+*** 
+The median inspection scores were more or less even across boros; though some boros seemed to have more extreme higher scores (i.e. extremely low performance restaurants).
+   
